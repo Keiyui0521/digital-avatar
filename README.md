@@ -1,81 +1,67 @@
-Digital Avatar 'Ku': An End-to-End Finetuning Project
+The Making of 'Ku', My Digital Avatar
 
-This repository documents the creation of 'Ku,' a personalized AI digital avatar, built by finetuning the Qwen3-14B large language model and deploying it as an interactive, voice-enabled web application.
+This repository documents the end-to-end development of 'Ku', a personalized AI built by finetuning the Qwen3-14B Large Language Model. The project's goal was to create a "digital avatar" that emulates my personal communication style.
 
-This project was built for the HUDT (Humanities and Digital Technologies) program and serves as a portfolio piece demonstrating a full-cycle MLOps workflow.
+This project was developed for the HUDT (Humanities and Digital Technologies) program and serves as a portfolio piece demonstrating a full-cycle MLOps workflow.
 
-🚀 Live Demo (GIF)
+Final Application Demo
 
-(Please record a short 10-15 second GIF of your Streamlit app working and add it here. Show yourself typing a message, 'Ku' responding, and the TTS voice playing. This is the single most effective way to show a recruiter what you built.)
+The final output is an interactive web application allowing real-time, voice-enabled conversation with the finetuned 'Ku' model.
 
-📖 Project Journal & Documentation
+Development Log
 
-For a complete, in-depth breakdown of the project's entire lifecycle, please read the full project journal:
+This project was executed in three distinct phases, from initial strategy to final deployment.
 
-➡️ Read the Full Project Journal (HUDT_Project_Journal.pdf)
+Phase 1: Strategy and Technical Selection
 
-The journal covers:
+Objective: Define the core technical approach for creating a personalized AI persona.
 
-Core Design: The decision between RAG (Retrieval Augmented Generation) vs. Finetuning.
+Methodology: Finetuning was selected over Retrieval-Augmented Generation (RAG). The goal was to deeply embed a communication style and persona into the model's parameters, rather than simply enabling it to retrieve facts about me.
 
-Technique: Why LoRA (Low-Rank Adaptation) was chosen.
+Technique: Low-Rank Adaptation (LoRA) was chosen as the finetuning technique. This allowed for efficient training on the 14-billion parameter base model without requiring prohibitive computational resources.
 
-Platform Evaluation: A real-world comparison of SiliconFlow, Huawei Cloud, and the final choice, Xunfei Xingchen MaaS.
+Phase 2: Data ETL (Extract, Transform, Load) Pipeline
 
-Data Engineering: The complete ETL (Extract, Transform, Load) pipeline for processing personal chat logs into a usable training dataset.
+Objective: Process raw, unstructured chat logs into a clean, structured dataset suitable for training.
 
-Model Finetuning: The full hyperparameter configuration used for the LoRA finetuning job.
+Data Cleaning: A Python script (delete_small_xlsx.py) was written to automatically parse a directory of Excel files and remove conversations with fewer than seven turns, ensuring sufficient conversational context.
 
-Deployment: Building the Streamlit UI, integrating the MaaS API, and adding voice synthesis (TTS).
+Data Transformation: The core script (xlsx_to_alpaca.py) was developed to convert the cleaned chat logs into the strict Alpaca JSON format. This script handles multi-turn dialogues and structures them into the required "instruction-input-output" schema for the finetuning process.
 
-Challenges: Analysis of failures, including platform issues and local deployment VRAM limitations.
+Phase 3: Model Training and Application Deployment
 
-✨ Key Features
+Objective: Train the custom LoRA adapter and build a user-facing application for interaction.
 
-Personalized Persona: Finetuned on custom chat data to emulate a specific communication style.
+Model Training: A LoRA finetuning job was configured and executed on the Xunfei Xingchen MaaS platform, using the dataset created in Phase 2.
 
-LoRA Finetuning: Uses LoRA to efficiently adapt the Qwen3-1A4B base model.
+Application Interface: A web-based chat interface was built using Streamlit (maas_chat_interface.py).
 
-Interactive Web UI: A user-friendly chat interface built with Streamlit.
+Voice Synthesis: The application was enhanced with a Text-to-Speech (TTS) feature by integrating Coqui-AI's xtts_v2 model, enabling 'Ku' to speak its responses in a cloned voice.
 
-Voice Synthesis: Integrated Coqui-AI's TTS model (xtts_v2) for voice-cloned, spoken responses.
-
-Model Versioning: The app can switch between different finetuned 'Ku' model versions (e.g., v1.0, v5.0).
-
-🛠 Tech Stack
+Technical Stack
 
 LLM: Qwen3-14B
 
-Finetuning: LoRA on Xunfei Xingchen MaaS
+Finetuning Method: LoRA
 
 Data Processing: Python, Pandas
 
 Web Application: Streamlit
 
-Voice: Coqui-TTS
+Voice Synthesis: Coqui-TTS
 
-API: OpenAI Python Client (for MaaS endpoint)
+Full Project Documentation
 
-📁 Repository Structure
+This README provides a high-level summary. For a comprehensive breakdown of the technical details, platform comparisons, challenges, and hyperparameter configurations, please refer to the full project journal.
 
-/
-├── README.md                # You are here
-├── HUDT_Project_Journal.pdf   # The complete project write-up
-├── app.py                     # The main Streamlit chat application
-├── requirements.txt         # Python dependencies
-│
-├── assets/                    # Static files (images, voice samples)
-├── data_processing/         # Python scripts for data cleaning & formatting
-├── sample_data/             # Anonymized sample data to show format
-└── scripts/                 # Utility scripts (e.g., API connection test)
+➡️ Click here to read the full HUDT Project Journal
 
-
-⚙️ How to Run Locally
+How to Run Locally
 
 Clone the repository:
 
-git clone [https://github.com/YOUR_USERNAME/ku_digital_avatar_project.git](https://github.com/YOUR_USERNAME/ku_digital_avatar_project.git)
-cd ku_digital_avatar_project
+git clone [https://github.com/Keiyui0521/digital-avatar.git](https://github.com/Keiyui0521/digital-avatar.git)
+cd digital-avatar
 
 
 Create and activate a virtual environment:
@@ -89,13 +75,10 @@ Install dependencies:
 pip install -r requirements.txt
 
 
-Set up your secrets:
+Configure API Keys:
 
-IMPORTANT: This code uses hard-coded API keys for simplicity in this public repository. For production, use environment variables. Update the keys directly in app.py and scripts/connect_finetuned_model.py.
+Note: For this portfolio, API keys are hard-coded. For production, always use environment variables. Update keys in data processing/maas_chat_interface.py and data processing/connect_finetuned_model.py.
 
-Run the Streamlit app:
+Run the Streamlit App:
 
-streamlit run app.py
-
-
-Open your browser to the local URL provided by Streamlit.
+streamlit run "data processing/maas_chat_interface.py"
