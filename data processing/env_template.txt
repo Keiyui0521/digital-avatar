@@ -1,0 +1,23 @@
+# MaaS API Configuration Template
+# Copy this file to .env and fill in your actual values
+
+# Required: Your MaaS API key
+MASS_API_KEY=your_api_key_here
+
+# Optional: API base URL (defaults to the provided URL if not set)
+MASS_API_BASE=https://maas-api.cn-huabei-1.xf-yun.com/v1
+
+# Optional: Model ID for connect_finetuned_model.py (defaults to xop3qwen14b if not set)
+MASS_MODEL_ID=xop3qwen14b
+
+# Optional: LoRA resource ID for connect_finetuned_model.py (defaults to the provided ID if not set)
+MASS_LORA_RESOURCE_ID=1922568028878811136
+
+# Optional: Model configurations for maas_chat_interface.py
+# KU1.0 model configuration
+KU1_MODEL_ID=xop3qwen14b
+KU1_LORA_RESOURCE_ID=1922568028878811136
+
+# KU5.0 model configuration
+KU5_MODEL_ID=xop3qwen14b
+KU5_LORA_RESOURCE_ID=1922568028878811136

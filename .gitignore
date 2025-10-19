@@ -1,0 +1,4 @@
+
+# Project-specific large data/artifacts (exclude from git)
+Spreadsheets/
+train_output/
