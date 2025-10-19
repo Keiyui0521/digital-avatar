@@ -8,6 +8,8 @@ This project was developed for the HUDT (Humanities and Digital Technologies) pr
 
 The final output is an interactive web application allowing real-time, voice-enabled conversation with the finetuned 'Ku' model.
 
+![Live demo of the 'Ku' digital avatar chat interface.](./assets/1019.gif)
+
 ## Development Log
 
 This project was executed in three distinct phases, from initial strategy to final deployment.
@@ -46,7 +48,7 @@ This project was executed in three distinct phases, from initial strategy to fin
 
 This README provides a high-level summary. For a comprehensive breakdown of the technical details, platform comparisons, challenges, and hyperparameter configurations, please refer to the full project journal.
 
-➡️ [Click here to read the full HUDT Project Journal](https://github.com/Keiyui0521/digital-avatar)
+➡️ [**Click here to read the full HUDT Project Journal**](./Project%20journal/HUDT%20journal.pdf)
 
 ## How to Run Locally
 
@@ -68,9 +70,11 @@ This README provides a high-level summary. For a comprehensive breakdown of the 
     ```
 
 4.  **Configure API Keys:**
-    *Note: For this portfolio, API keys are hard-coded. For production, always use environment variables. Update keys in `data processing/maas_chat_interface.py` and `data processing/connect_finetuned_model.py`.*
+    * **Note:** For this portfolio, API keys are hard-coded. For production, always use environment variables. Update keys in `data processing/maas_chat_interface.py` and `data processing/connect_finetuned_model.py`.
 
 5.  **Run the Streamlit App:**
     ```bash
     streamlit run "data processing/maas_chat_interface.py"
     ```
+
+6.  Open the local URL provided by Streamlit in your browser.
